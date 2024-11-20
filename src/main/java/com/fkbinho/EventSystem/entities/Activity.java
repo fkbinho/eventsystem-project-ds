@@ -2,7 +2,9 @@ package com.fkbinho.EventSystem.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,8 +24,8 @@ public class Activity {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne(mappedBy = "activity", cascade = CascadeType.ALL)
-    private Bloc bloc;
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
+    private List<Bloc> blocs = new ArrayList<>();
 
     @ManyToMany(mappedBy = "activities")
     private Set<Participant> participants = new HashSet<>();
@@ -31,13 +33,12 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(Integer id, String name, String description, Double price, Category category, Bloc bloc) {
+    public Activity(Integer id, String name, String description, Double price, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
-        this.bloc = bloc;
     }
 
     public Integer getId() {
@@ -80,15 +81,12 @@ public class Activity {
         this.category = category;
     }
 
-    public Bloc getBloc() {
-        return bloc;
-    }
-
-    public void setBloc(Bloc bloc) {
-        this.bloc = bloc;
+    public List<Bloc> getBlocs() {
+        return blocs;
     }
 
     public Set<Participant> getParticipants() {
         return participants;
     }
+
 }

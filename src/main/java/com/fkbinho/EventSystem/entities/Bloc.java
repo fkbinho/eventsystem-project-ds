@@ -18,8 +18,8 @@ public class Bloc {
     @Column(name = "end_time", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant end;
 
-    @OneToOne
-    @MapsId
+    @ManyToOne
+    @JoinColumn(name = "activity_id")
     private Activity activity;
 
     public Bloc() {
