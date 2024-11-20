@@ -2,6 +2,9 @@ package com.fkbinho.EventSystem.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_activity")
 public class Activity {
@@ -21,6 +24,9 @@ public class Activity {
 
     @OneToOne(mappedBy = "activity", cascade = CascadeType.ALL)
     private Bloc bloc;
+
+    @ManyToMany(mappedBy = "activities")
+    private Set<Participant> participants = new HashSet<>();
 
     public Activity() {
     }
@@ -80,5 +86,9 @@ public class Activity {
 
     public void setBloc(Bloc bloc) {
         this.bloc = bloc;
+    }
+
+    public Set<Participant> getParticipants() {
+        return participants;
     }
 }
