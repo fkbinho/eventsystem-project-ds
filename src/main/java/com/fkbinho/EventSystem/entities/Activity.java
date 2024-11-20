@@ -19,15 +19,19 @@ public class Activity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @OneToOne(mappedBy = "activity", cascade = CascadeType.ALL)
+    private Bloc bloc;
+
     public Activity() {
     }
 
-    public Activity(Integer id, String name, String description, Double price, Category category) {
+    public Activity(Integer id, String name, String description, Double price, Category category, Bloc bloc) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
+        this.bloc = bloc;
     }
 
     public Integer getId() {
@@ -68,5 +72,13 @@ public class Activity {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Bloc getBloc() {
+        return bloc;
+    }
+
+    public void setBloc(Bloc bloc) {
+        this.bloc = bloc;
     }
 }
